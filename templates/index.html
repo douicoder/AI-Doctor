@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            padding: 29px 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+        #advice {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+        .link-container {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: none; /* Initially hide the link container */
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Doctor</h1>
+    <form id="symptomForm">
+        <label for="symptoms">Symptoms:</label>
+        <input type="text" id="symptoms" name="symptoms" required>
+        <button type="submit">Get Advice</button>
+    </form>
+    <h2>Advice:</h2>
+    <div id="advice">
+        <p id="advice-text"></p>
+        <div class="link-container">
+            <a id="advice-link" href="#" target="_blank">Check analytics...</a>
+        </div>
+    </div>
+    <footer>
+        <p>Made by Anirudh K. Gurvinder</p>
+    </footer>
+    <script>
+        document.getElementById('symptomForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const symptoms = document.getElementById('symptoms').value;
+
+            fetch('/ask_doctor', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ symptoms: symptoms })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show advice and hyperlink only if advice is present
+                const adviceParagraph = document.getElementById('advice-text');
+                const linkContainer = document.querySelector('.link-container');
+                
+                if (data.advice) {
+                    adviceParagraph.textContent = data.advice;
+                    const link = document.getElementById('advice-link');
+                    link.href = data.link || '/graphanilytics'; // Default to '/graphanilytics' if no link provided
+                    linkContainer.style.display = 'block'; // Show the link container
+                } else {
+                    adviceParagraph.textContent = '';
+                    linkContainer.style.display = 'none'; // Hide the link container
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

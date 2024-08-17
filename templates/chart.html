@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptoms Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        #chart-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Number of Patients with Each Symptom</h1>
+    <div id="chart-container">
+        <img id="symptoms-chart" src="data:image/png;base64,{{ chart }}" alt="Symptoms Chart">
+    </div>
+    <footer>
+        <p>Made by Anirudh k. Gurvinder</p>
+    </footer>
+    <script>
+        // Placeholder function for future dynamic content loading if needed
+        function loadChartData() {
+            // Logic for dynamic content (if needed)
+        }
+
+        // Call the function on page load
+        window.onload = loadChartData;
+    </script>
+</body>
+</html>

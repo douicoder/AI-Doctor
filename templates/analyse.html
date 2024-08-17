@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            padding: 29px 40px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+        #analytics {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        footer {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #333;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    </style>
+</head>
+<body>
+    <h1>AI Doctor's Analytics</h1>
+
+    <h2>Analytics:</h2>
+    <p id="analytics">Loading...</p>
+    <footer>
+        <p>Made by Anirudh k. Gurvinder</p>
+    </footer>
+    <script>
+        // Function to fetch analytics data
+        async function fetchAnalytics() {
+            try {
+                const response = await fetch('/analytics', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json' // Ensure this matches the server's expectation
+                    },
+                    body: JSON.stringify({}) // Send any required data here; empty object if none needed
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                document.getElementById('analytics').textContent = data.data || 'No data available.';
+            } catch (error) {
+                document.getElementById('analytics').textContent = 'Failed to load analytics.';
+            }
+        }
+
+        // Fetch analytics data when the page loads
+        window.onload = fetchAnalytics;
+    </script>
+</body>
+</html>
