@@ -2,3 +2,4 @@ textblob
 matplot
 google-generativeai
 Flask
+Gunicorn
