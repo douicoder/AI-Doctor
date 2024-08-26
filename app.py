@@ -99,7 +99,7 @@ def create_chart(data):
     plt.bar(symptoms, counts, color='skyblue')
     plt.xlabel("Symptoms")
     plt.ylabel("Count")
-    plt.title("Number of Patients with Each Symptom")
+    plt.title("Recent Symptoms")
     plt.xticks(rotation=45, ha="right")
     plt.tight_layout()
     
