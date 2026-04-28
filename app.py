@@ -166,9 +166,9 @@ def create_table():
 app = Flask(__name__)
 
 
-genai.configure(api_key="AIzaSyDLZzjgJOTZmcw4tRTVbhEkInF1KpMYblM")
+genai.configure(api_key="AIzaSyDkSjx287xdrJvYacuSi8W5vnXKWMeznUY")
 
-model = genai.GenerativeModel('gemini-2.5-flash')
+model = genai.GenerativeModel('gemini-2.5-flash-lite)
 
 @app.route('/')
 def home():
