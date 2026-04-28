@@ -168,7 +168,7 @@ app = Flask(__name__)
 
 genai.configure(api_key="AIzaSyDkSjx287xdrJvYacuSi8W5vnXKWMeznUY")
 
-model = genai.GenerativeModel('gemini-2.5-flash-lite)
+model = genai.GenerativeModel('gemini-2.5-flash-lite')
 
 @app.route('/')
 def home():
